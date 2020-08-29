@@ -13,13 +13,48 @@
 </head>
 <body>
 
-<section class="container-fluid">
+<!-- the top header section -->
+<section class="container">
     <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8 text-center">
+        <div class="col-md-12 text-center">
             <h1>Exchange Rate API</h1>
         </div>
-        <div class="col-md-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <hr width="100%" />
+        </div>
+    </div>
+</section>
+
+<!-- the exchange rate form -->
+<section class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 text-center">
+
+            <form class="form-inline" action="./scripts/submit_exchange_rate.php">
+                <div class="form-group">
+                    <label for="start_date">Start Date:</label>
+                    <input type="date" class="form-control" id="start_date">
+                </div>
+                <div class="form-group">
+                    <label for="end_date">End Date:</label>
+                    <input type="date" class="form-control" id="end_date">
+                </div>
+                <div class="form-group">
+                    <label for="base_currency">End Date:</label>
+                    <select class="form-control" id="base_currency">
+                        <option>Select Base Currency</option>
+                        <option>USD</option>
+                        <option>EUR</option>
+                        <option>CAD</option>
+                        <option>ZAR</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+
+        </div>
     </div>
 </section>
 
