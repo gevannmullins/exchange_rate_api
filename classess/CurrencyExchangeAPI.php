@@ -1,5 +1,7 @@
 <?php
 
+//include_once "./DbConnectQuery.php";
+
 
 class CurrencyExchangeAPI
 {
@@ -10,10 +12,10 @@ class CurrencyExchangeAPI
 
     public function getDateRangeCurrencyExchange($startDate, $endDate, $baseCurrency="USD")
     {
-//        $startDate = date("Y-m-d", $startDate);
-//        $endDate = date("Y-m-d", $endDate);
+        // DbConnectQuery
+//        $dcq = new DbConnectQuery("localhost", "admin", "admin", "exchange_rate_api", "3306");
+
         return file_get_contents($this->base_url . "history?start_at=" . $startDate . "&end_at=" . $endDate . "&base=" . $baseCurrency);
-//        return file_get_contents($this->base_url . "history?start_at=" . $startDate . "&end_at=" . $endDate);
 
     }
 

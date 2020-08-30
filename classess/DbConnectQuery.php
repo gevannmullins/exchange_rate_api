@@ -4,61 +4,26 @@
 class DbConnectQuery
 {
 
+    private $conn = null;
 
-    private $pdo = null;
-
-    private $statement = null;
-
-    public function __construct($hostname, $username, $password, $database, $port, $dbpath=null, $sqlitefile=null) {
+    public function __construct($hostname, $username, $password, $database, $port, $dbpath=null, $sqlitefile=null)
+    {
         try {
-            $this->pdo = new \PDO("mysql:host=" . $hostname . ";port=" . $port . ";dbname=" . $database, $username, $password, array(\PDO::ATTR_PERSISTENT => true));
-        } catch(\PDOException $e) {
+            $this->conn = new mysqli($hostname, $username, $password, $database);
+        } catch(\mysqli_sql_exception $e) {
             trigger_error('Error: Could not make a database link ( ' . $e->getMessage() . '). Error Code : ' . $e->getCode() . ' <br />');
             exit();
         }
-
-        // set default setting database
-        $this->pdo->exec("SET NAMES 'utf8'");
-        $this->pdo->exec("SET CHARACTER SET utf8");
-        $this->pdo->exec("SET CHARACTER_SET_CONNECTION=utf8");
-        $this->pdo->exec("SET SQL_MODE = ''");
     }
 
-
-    public function query($sql) {
-        $this->statement = $this->pdo->prepare($sql);
-        $result = false;
-
-        try {
-            if ($this->statement && $this->statement->execute()) {
-                $data = array();
-
-                while ($row = $this->statement->fetch(\PDO::FETCH_ASSOC)) {
-                    $data[] = $row;
-                }
-
-                // create std class
-                $result = new \stdClass();
-                $result->row = (isset($data[0]) ? $data[0] : array());
-                $result->rows = $data;
-                $result->num_rows = $this->statement->rowCount();
-            }
-        } catch (\PDOException $e) {
-            trigger_error('Error: ' . $e->getMessage() . ' Error Code : ' . $e->getCode() . ' <br />' . $sql);
-            exit();
-        }
-
-        if ($result) {
-            return $result;
+    public function mysqlQuery($sql)
+    {
+        if (mysqli_query($this->conn, $sql)) {
+            return "New record created successfully";
         } else {
-            $result = new \stdClass();
-            $result->row = array();
-            $result->rows = array();
-            $result->num_rows = 0;
-            return $result;
+            return "Error: " . $sql . "" . mysqli_error($this->conn);
         }
     }
-
 
     public function escape($value) {
         $search = array("\\", "\0", "\n", "\r", "\x1a", "'", '"');
@@ -68,11 +33,11 @@ class DbConnectQuery
 
 
     public function getLastId() {
-        return $this->pdo->lastInsertId();
+        return $this->conn->insert_id;
     }
 
     public function __destruct() {
-        $this->pdo = null;
+        $this->conn = null;
     }
 
 }
