@@ -13,7 +13,7 @@ $latest_user_queries = $dcq->mysqlGet($sql);
 
 ?>
 
-<table>
+<table class="table table-striped">
     <?php
 
     foreach($latest_user_queries as $luq){
@@ -25,6 +25,12 @@ $latest_user_queries = $dcq->mysqlGet($sql);
                 <td><?php echo $luq[2]; ?></td>
                 <td><?php echo $luq[3]; ?></td>
                 <td><?php echo $luq[4]; ?></td>
+                <td>
+                    <button class="btn-success">View Results</button>
+                </td>
+                <td>
+                    <button class="btn-warning">Delete Results</button>
+                </td>
             </tr>
 
         <?php

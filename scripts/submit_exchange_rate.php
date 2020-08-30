@@ -15,7 +15,7 @@ $cea = new CurrencyExchangeAPI();
 $startDate = $_POST["startDate"];
 $endDate = $_POST["endDate"];
 $baseCurrency = $_POST["baseCurrency"];
-$dateCreated = date("Y-m-d");
+$dateCreated = date("Y-m-d H:i:s");
 
 
 // save the user's form query to the db
