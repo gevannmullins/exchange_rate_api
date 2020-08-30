@@ -25,6 +25,22 @@ class DbConnectQuery
         }
     }
 
+    public function mysqlGet($sql)
+    {
+//        return mysqli_query($this->conn, $sql);
+
+        $result = mysqli_query($this->conn,$sql);
+
+        // Associative array
+//        $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+        $rows = mysqli_fetch_all($result);
+
+
+
+        return $rows;
+
+    }
+
     public function escape($value) {
         $search = array("\\", "\0", "\n", "\r", "\x1a", "'", '"');
         $replace = array("\\\\", "\\0", "\\n", "\\r", "\Z", "\'", '\"');

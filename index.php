@@ -56,12 +56,47 @@
 
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <hr width="100%" />
+        </div>
+    </div>
+</section>
+
+<section class="container-fluid">
+    <div class="row">
+        <div class="col-md-12" id="user_last_query_container">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <hr width="100%" />
+        </div>
+    </div>
 </section>
 
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="assets/jquery/jquery-3.5.1.min.js"></script>
+<script src="./assets/jquery/jquery-3.5.1.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="./assets/bootstrap/js/bootstrap.min.js"></script>
+
+
+<script>
+    $(document).ready(function(){
+
+        $.ajax({
+            url: "./scripts/get_latest_user_queries.php",
+            success: function(data){
+                $("#user_last_query_container").html(data);
+            }
+        });
+
+    });
+</script>
+
+
 </body>
 </html>
