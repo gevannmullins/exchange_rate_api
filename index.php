@@ -67,7 +67,7 @@
 <section class="container-fluid">
     <div class="row">
         <div class="col-md-12" id="user_last_query_container">
-
+            Loading ...
         </div>
     </div>
     <div class="row">

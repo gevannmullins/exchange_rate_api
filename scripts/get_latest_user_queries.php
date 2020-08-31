@@ -13,7 +13,16 @@ $latest_user_queries = $dcq->mysqlGet($sql);
 
 ?>
 
-<table class="table table-striped">
+<table class="table table-striped table-bordered">
+    <thead>
+        <td>ID</td>
+        <td>Base Currency</td>
+        <td>Start Date</td>
+        <td>End Date</td>
+        <td>Date Searched</td>
+        <td></td>
+        <td></td>
+    </thead>
     <?php
 
     foreach($latest_user_queries as $luq){
@@ -26,10 +35,10 @@ $latest_user_queries = $dcq->mysqlGet($sql);
                 <td><?php echo $luq[3]; ?></td>
                 <td><?php echo $luq[4]; ?></td>
                 <td>
-                    <button class="btn-success">View Results</button>
+                    <button class="btn btn-success view_results_btn" query_id="<?php echo $luq[0]; ?>">View Results</button>
                 </td>
                 <td>
-                    <button class="btn-warning">Delete Results</button>
+                    <button class="btn btn-warning delete_results_btn" query_id="<?php echo $luq[0]; ?>">Delete Results</button>
                 </td>
             </tr>
 
@@ -40,4 +49,22 @@ $latest_user_queries = $dcq->mysqlGet($sql);
 
     ?>
 </table>
+
+<script>
+    $(document).ready(function() {
+
+        $(".delete_results_btn").on('click', function(){
+            $.ajax({
+                type: "POST",
+                url: "./scripts/delete_query_results.php",
+                data: {"query_id":$(this).attr("query_id")},
+                success: function(data){
+                    $("#user_last_query_container").html(data);
+                }
+            });
+            // alert($(this).attr("query_id"));
+        });
+
+    });
+</script>
 

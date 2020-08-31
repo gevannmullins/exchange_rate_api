@@ -25,20 +25,20 @@ class DbConnectQuery
         }
     }
 
+    public function mysqlDelete($sql)
+    {
+        if (mysqli_query($this->conn, $sql)) {
+            return "Successfully deleted all records";
+        } else {
+            return "Error: " . $sql . "" . mysqli_error($this->conn);
+        }
+    }
+
     public function mysqlGet($sql)
     {
-//        return mysqli_query($this->conn, $sql);
-
         $result = mysqli_query($this->conn,$sql);
-
-        // Associative array
-//        $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
         $rows = mysqli_fetch_all($result);
-
-
-
         return $rows;
-
     }
 
     public function escape($value) {
