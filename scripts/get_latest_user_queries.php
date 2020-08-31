@@ -1,10 +1,13 @@
 <?php
 
+include_once "../dbinfo.php";
+
 // include the currency exchange api class and the database class to the file
 include_once "../classess/DbConnectQuery.php";
 
 // DbConnectQuery
-$dcq = new DbConnectQuery("localhost:3306", "admin", "admin", "exchange_rate_api", "3306");
+//$dcq = new DbConnectQuery("localhost:3306", "admin", "admin", "exchange_rate_api", "3306");
+$dcq = new DbConnectQuery($host, $username, $password, $database, "3306");
 
 $sql = "
 SELECT * FROM date_range_user_query ORDER BY date_created DESC
@@ -52,6 +55,18 @@ $latest_user_queries = $dcq->mysqlGet($sql);
 
 <script>
     $(document).ready(function() {
+
+        $(".view_results_btn").on('click', function(){
+            $.ajax({
+                type: "POST",
+                url: "./scripts/view_query_results.php",
+                data: {"query_id":$(this).attr("query_id")},
+                success: function(data){
+                    $("#user_last_query_container").html(data);
+                }
+            });
+            // alert($(this).attr("query_id"));
+        });
 
         $(".delete_results_btn").on('click', function(){
             $.ajax({

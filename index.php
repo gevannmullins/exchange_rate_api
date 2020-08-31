@@ -1,3 +1,6 @@
+<?php
+include_once "./dbinfo.php";
+?>
 <!doctype html>
 <html lang="en">
 <head>
