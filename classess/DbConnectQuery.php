@@ -25,10 +25,19 @@ class DbConnectQuery
         }
     }
 
+    public function mysqlInsert($sql)
+    {
+        if (mysqli_query($this->conn, $sql)) {
+            return true;
+        } else {
+            return "Error: " . $sql . "" . mysqli_error($this->conn);
+        }
+    }
+
     public function mysqlDelete($sql)
     {
         if (mysqli_query($this->conn, $sql)) {
-            return "Successfully deleted all records";
+            return true;
         } else {
             return "Error: " . $sql . "" . mysqli_error($this->conn);
         }

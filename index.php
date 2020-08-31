@@ -116,6 +116,7 @@
 <script>
     $(document).ready(function(){
 
+        // load the latest user results
         $.ajax({
             url: "./scripts/get_latest_user_queries.php",
             success: function(data){
