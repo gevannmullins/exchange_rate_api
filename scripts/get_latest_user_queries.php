@@ -6,7 +6,6 @@ include_once "../dbinfo.php";
 include_once "../classess/DbConnectQuery.php";
 
 // DbConnectQuery
-//$dcq = new DbConnectQuery("localhost:3306", "admin", "admin", "exchange_rate_api", "3306");
 $dcq = new DbConnectQuery($host, $username, $password, $database, "3306");
 
 $sql = "
@@ -65,7 +64,6 @@ $latest_user_queries = $dcq->mysqlGet($sql);
                     $("#user_last_query_container").html(data);
                 }
             });
-            // alert($(this).attr("query_id"));
         });
 
         $(".delete_results_btn").on('click', function(){
@@ -77,7 +75,6 @@ $latest_user_queries = $dcq->mysqlGet($sql);
                     $("#user_last_query_container").html(data);
                 }
             });
-            // alert($(this).attr("query_id"));
         });
 
     });

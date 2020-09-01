@@ -8,7 +8,6 @@ $query_id = $_POST["query_id"];
 include_once "../classess/DbConnectQuery.php";
 
 // DbConnectQuery
-//$dcq = new DbConnectQuery("localhost:3306", "admin", "admin", "exchange_rate_api", "3306");
 $dcq = new DbConnectQuery($host, $username, $password, $database, "3306");
 
 

@@ -1,5 +1,6 @@
 <?php
 
+// include the database information
 include_once "../dbinfo.php";
 
 $user_query_id = $_POST['query_id'];
@@ -8,16 +9,15 @@ $user_query_id = $_POST['query_id'];
 include_once "../classess/DbConnectQuery.php";
 
 // DbConnectQuery
-//$dcq = new DbConnectQuery("localhost:3306", "admin", "admin", "exchange_rate_api", "3306");
 $dcq = new DbConnectQuery($host, $username, $password, $database, "3306");
 
-
+// db query to get the user's query results
 $sql = "
 SELECT * FROM date_rage_user_results WHERE user_query_id = '$user_query_id'
 ";
 $query_result = $dcq->mysqlGet($sql);
 
-
+// looping through the results
 foreach($query_result as $qr) {
 
     $response = substr_replace($qr[4],"",0,1);
@@ -64,7 +64,6 @@ foreach($query_result as $qr) {
     </thead>
 <?php
     foreach($response['rates'] as $resp){
-//        echo $resp['CAD'];
         ?>
         <tr>
             <td><?php echo $resp['CAD']; ?></td>
@@ -115,6 +114,7 @@ foreach($query_result as $qr) {
 
 ?>
 
+<!-- added the back button to return to the previous page information -->
 <a class="btn btn-success display_user_queries" href="#">Back</a>
 <script>
     $(document).ready(function(){
@@ -126,7 +126,6 @@ foreach($query_result as $qr) {
                     $("#user_last_query_container").html(data);
                 }
             });
-
         });
 
     });

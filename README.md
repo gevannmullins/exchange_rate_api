@@ -29,3 +29,21 @@ Allows user to view exchange rates
   cosmetics. With that said, having a responsive Webapp will count in your
   favor as it will show us that you have pride in the work you do ... from both a
   backend and frontend perspective.
+  
+## Setup Instructions
+- This system was build using PHP7.3, please ensure that your server uses something 
+  similar or higher. Ensure that the "index.php" file is in the root directory
+  of your server.
+- Please open the "dbinfo.php" file and fill in your database information.
+- Included in the "sql" folder is the "exchange_rate_api.sql" file. Please import this file
+  into your database. It will provide your database with the correct structure
+  for the system to work.
+- This should be all that is needed for the system to work.
+
+## Last Word
+This system was pretty easy to build. I have not yet tested every aspect of the system,
+so I am sure you will find a few bugs that I might have overlooked.
+I also was not sure what was allowed and what was not allowed, so I tried my very best 
+to stick to your rule of not implementing any frameworks. The only frameworks I added was 
+the Bootstrap and JQuery frameworks. Everything else I created from scratch.
+If you have any questions, please do not hesitate to ask and I will explain.
